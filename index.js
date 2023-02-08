@@ -43,3 +43,11 @@ server.get('/get-wishlist',(req,res)=>{
         res.status(result.statusCode).json(result)
     })
 })
+
+//remove-item-wishlist Api
+server.delete('/remove-item-wishlist/:productId',(req,res)=>{
+    dataService.deleteItemWishlist(req.params.productId)
+    .then((result)=>{
+        res.status(result.statusCode).json(result)
+    })
+})

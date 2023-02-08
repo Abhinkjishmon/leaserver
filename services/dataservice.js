@@ -78,7 +78,7 @@ const addtowishlist = (product) => {
 }
 
 //getwishlist
-const getwishlist = ()=>{
+const getwishlist = () => {
     return db.Wishlist.find().then(
         (result) => {
             if (result) {
@@ -97,11 +97,43 @@ const getwishlist = ()=>{
     )
 }
 
+//deleteItemWishlist
+const deleteItemWishlist = (id) => {
+    return db.Wishlist.deleteOne({id})
+        .then((result) => {
+            if (result) {
+                return db.Wishlist.find().then(
+                    (result) => {
+                        if (result) {
+                            return {
+                                statusCode: 200,
+                                wishlist: result
+                            }
+                        }
+                        else {
+                            return {
+                                statusCode: 404,
+                                message: "Wishlist is empty"
+                            }
+                        }
+                    }
+                )
+            }
+            else {
+                return {
+                    statusCode: 404,
+                    message: "Item not found"
+                }
+            }
+        })
+}
+
 
 
 module.exports = {
     allProducts,
     viewProduct,
     addtowishlist,
-    getwishlist
+    getwishlist,
+    deleteItemWishlist
 }
