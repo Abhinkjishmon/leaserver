@@ -27,3 +27,19 @@ server.get('/view-products/:productId',(req,res)=>{
         res.status(result.statusCode).json(result)
     })
 })
+
+//addtowishlist api
+server.post('/add-to-wishlist',(req,res)=>{
+    dataService.addtowishlist(req.body)
+    .then((result)=>{
+        res.status(result.statusCode).json(result)
+    })
+})
+
+//get-wishlist Api
+server.get('/get-wishlist',(req,res)=>{
+    dataService.getwishlist()
+    .then((result)=>{
+        res.status(result.statusCode).json(result)
+    })
+})
